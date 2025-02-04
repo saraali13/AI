@@ -39,23 +39,23 @@ class HospitalDeliveryRobotTask:
             self.critical_situation = False
 
 
-class HospitalDeliveryRobot(HospitalDeliveryRobotTask):
-    def __init__(self, env, med, patient, curr_sit, room):
-        super().__init__(env, med, patient, curr_sit)
+class HospitalDeliveryRobot:
+    def __init__(self, task, room):
+        self.task = task
         self.room = room
 
     def execute_task(self):
-        if self.room in self.patient_schedule:
+        if self.room in self.task.patient_schedule:
             print(f"\nStarting task for {self.room}:\n")
-            required_medicine = self.patient_schedule[self.room]
+            required_medicine = self.task.patient_schedule[self.room]
             if required_medicine:
-                self.move_to("Medicine Storage")
-                self.pick_medicine(required_medicine)
-                self.move_to(self.room)
-                self.scan_patient_id(self.room)
-                self.deliver_medicine(self.room)
-                if self.critical_situation:
-                    self.alert_staff()
+                self.task.move_to("Medicine Storage")
+                self.task.pick_medicine(required_medicine)
+                self.task.move_to(self.room)
+                self.task.scan_patient_id(self.room)
+                self.task.deliver_medicine(self.room)
+                if self.task.critical_situation:
+                    self.task.alert_staff()
 
         else:
             print(f"No schedule found for {self.room}")
@@ -71,12 +71,15 @@ patient_schedule = {
 }
 
 # Instantiate robot and execute tasks
-Task1 = HospitalDeliveryRobot(hospital_layout, medicines, patient_schedule, True, "Room 101")
+T1 = HospitalDeliveryRobotTask(hospital_layout, medicines, patient_schedule, True)
+Task1 = HospitalDeliveryRobot(T1, "Room 101")
 Task1.execute_task()
 print("\n")
-Task2 = HospitalDeliveryRobot(hospital_layout, medicines, patient_schedule, False, "Room 204")
+T2 = HospitalDeliveryRobotTask(hospital_layout, medicines, patient_schedule, False)
+Task2 = HospitalDeliveryRobot(T2, "Room 204")
 Task2.execute_task()
 print("\n")
-Task3 = HospitalDeliveryRobot(hospital_layout, medicines, patient_schedule, False, "Room 103")
+T3 = HospitalDeliveryRobotTask(hospital_layout, medicines, patient_schedule, False)
+Task3 = HospitalDeliveryRobot(T3, "Room 103")
 Task3.execute_task()
 print("\n")

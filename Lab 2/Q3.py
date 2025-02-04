@@ -14,19 +14,19 @@ class BackupManagementSystem:
         print("\nFinal Backup Status: \n", self.tasks)
 
 
-class BackupManagementAgent(BackupManagementSystem):
+class BackupManagementAgent():
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, system):
+        self.system = system
         self.failed_tasks = []
 
     def scan_system(self):
-        for i in self.tasks:
-            if self.tasks[i] == "Failed":
+        for i in self.system.tasks:
+            if self.system.tasks[i] == "Failed":
                 self.failed_tasks.append(i)
 
         print("\nScan Report:")
-        for i in self.tasks:
+        for i in self.system.tasks:
             if i in self.failed_tasks:
                 print(f"{i}: Backup Failed!")
             else:
@@ -34,16 +34,16 @@ class BackupManagementAgent(BackupManagementSystem):
 
     def retry_backup(self):
         for i in self.failed_tasks:
-            self.tasks[i] = "Completed"
-
-
-BM_Agent = BackupManagementAgent()
+            self.system.tasks[i] = "Completed"
+        print("\nAll Backups are completed successfully!")
+BM_Sys=BackupManagementSystem()
+BM_Agent = BackupManagementAgent(BM_Sys)
 
 # printing the initial state
-BM_Agent.initial_status()
+BM_Sys.initial_status()
 # scanning the system status
 BM_Agent.scan_system()
 # Retrying the failed backup
 BM_Agent.retry_backup()
 # printing the final state of the system after retrying
-BM_Agent.final_status()
+BM_Sys.final_status()

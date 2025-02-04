@@ -15,19 +15,19 @@ class SecuritySystem:
         print("\nFinal System Status: \n", self.components)
 
 
-class SecurityAgent(SecuritySystem):
+class SecurityAgent:
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self,system):
+        self.system=system
         self.vulnerable_components = []
 
     def scan_system(self):
-        for i in self.components:
-            if self.components[i] == "Vulnerable":
+        for i in self.system.components:
+            if self.system.components[i] == "Vulnerable":
                 self.vulnerable_components.append(i)
 
         print("\nScan Report:")
-        for i in self.components:
+        for i in self.system.components:
             if i in self.vulnerable_components:
                 print(f"{i}: Warning Vulnerable!")
 
@@ -36,12 +36,12 @@ class SecurityAgent(SecuritySystem):
 
     def patch_system(self):
         for i in self.vulnerable_components:
-            self.components[i] = "Safe"
+            self.system.components[i] = "Safe"
         print("\nPatched all vulnerable components!")
 
 
 sec_system = SecuritySystem()
-sec_agent = SecurityAgent()
+sec_agent = SecurityAgent(sec_system)
 
 # Printing the initial state
 sec_system.initial_check()

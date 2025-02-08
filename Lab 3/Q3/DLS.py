@@ -36,8 +36,23 @@ tree = {
     'I': []
 }
 
-# Test Iterative Deepening
-start_node = 'A'
-goal_node = 'I'
-max_search_depth = 3
-iterative_deepening(start_node, goal_node, max_search_depth, tree)
+# Graph Representation
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F', 'G'],
+    'D': ['B', 'H'],
+    'E': ['B'],
+    'F': ['C', 'I'],
+    'G': ['C'],
+    'H': ['D'],
+    'I': ['F']
+}
+
+# Test IDDFS on Tree
+print("IDDFS on Tree:")
+iterative_deepening("A", "I", 3, tree)
+
+# Test IDDFS on Graph
+print("\nIDDFS on Graph:")
+iterative_deepening('A', 'I', 4, graph)

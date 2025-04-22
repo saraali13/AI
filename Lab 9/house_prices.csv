@@ -1,0 +1,11 @@
+bedrooms,bathrooms,sqft,age,neighborhood,price
+3,2,1500,5,Suburb_A,250000
+4,2.5,2000,10,Urban_B,350000
+2,1,1200,15,Suburb_A,180000
+3,2,1800,8,Urban_C,320000
+4,3,2200,3,Urban_B,420000
+2,1,950,20,Rural_D,120000
+3,2,1600,12,Suburb_A,280000
+5,3.5,2400,5,Urban_C,450000
+3,1.5,1300,18,Rural_D,150000
+4,2,1900,7,Urban_B,380000
